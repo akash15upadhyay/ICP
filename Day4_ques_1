@@ -1,0 +1,20 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        ArrayList<Character> ll= new ArrayList<>();
+        int maxuniqlen=0;
+        int endidx=0;
+        int startidx=0;
+        while(endidx<s.length()) {
+            if(!ll.contains(s.charAt(endidx))) {
+                ll.add(s.charAt(endidx));
+                endidx++;
+                maxuniqlen = Math.max(maxuniqlen,(endidx-startidx));
+            }
+            else{        
+                ll.remove((Character)s.charAt(startidx));
+                startidx++;
+            }
+        }
+        return maxuniqlen;    
+    }
+}
