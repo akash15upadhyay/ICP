@@ -1,0 +1,24 @@
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        List<List<Integer>> res = new ArrayList<>();
+        ArrayList<Integer> curr = new ArrayList<>();
+        findcombsum(res,curr,candidates,0,target); 
+        return res;  
+    }
+    static void findcombsum(List<List<Integer>> res,ArrayList<Integer> curr,int[] candidates,int idx,int target){
+        // base case
+        if(target==0){
+            res.add(new ArrayList<Integer>(curr));
+            return;
+        }
+
+        for(int i=idx;i<candidates.length;i++){
+            if(i==idx || candidates[i-1]!=candidates[i] && candidates[i]<=target){
+                curr.add(candidates[i]);
+                findcombsum(res,curr,candidates,i+1,target-candidates[i]);
+                curr.remove(curr.size()-1);
+            }
+        }
+    }
+}
